@@ -2,19 +2,39 @@
 }
 
 .input {
+    color: black;
+    font-family: "Montserrat", sans-serif;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    width: 372px;
+    height: 36px;
+    border: 1px solid #D1D1D1;
+    border-radius: 3px;
+    margin-right: 10px;
 }
 
 .inputWrapper {
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .superInput {
 }
 
 .errorInput {
+    border: 2px solid #CC0000;
+    font-family: "Montserrat", sans-serif;
+    color: #CC0000;
 }
 
 .errorInput:focus {
 }
 
 .error {
+    color: #CC0000;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
 }
