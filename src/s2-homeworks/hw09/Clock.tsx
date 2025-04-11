@@ -24,9 +24,9 @@ function Clock() {
     return new Date().toLocaleString(lang, { month: 'long' });
   }
 
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
+  const day = String(date.getDate()).padStart(2, '0');      
+  const month = String(date.getMonth() + 1).padStart(2, '0'); 
+  const year = date.getFullYear();                       
 
   const formattedDate = `${day}.${month}.${year}`;
 
@@ -38,7 +38,7 @@ function Clock() {
     }
 
     const startDate = new Date();
-    startDate.setSeconds(0);
+    startDate.setSeconds(0); 
     setDate(startDate);
 
     const id = window.setInterval(() => {
@@ -50,7 +50,7 @@ function Clock() {
     }, 1000);
 
     setTimerId(id);
-
+    
     // сохранить ид таймера (https://learn.javascript.ru/settimeout-setinterval#setinterval)
 
   }
