@@ -34,15 +34,52 @@ const HW13 = () => {
         axios
             .post(url, {success: x})
             .then((res) => {
-                setCode('Код 200!')
-                setImage(success200)
+
+                if (res.status === 200) {
+                    setCode('Код 200! Успех!');
+                    setText('...всё ок)')
+                    setImage(success200);
+                    setInfo('код 200 - обычно означает что скорее всего всё ок)')
+                } else if (res.data === null) {
+                  setCode('Ответ сервера: null');
+                  setImage(errorUnknown);
+                  setText('Error')
+                  setInfo('')
+                }
                 // дописать
 
             })
             .catch((e) => {
                 // дописать
+                if (e.response) {
+                    // Сервер ответил, но с ошибкой (4xx, 5xx)
+                    const status = e.response.status;
 
+                    if (status === 400) {
+                        setCode('Ошибка 400: Неверный запрос');
+                        setText('Ты не отправил success в body вообще!')
+                        setImage(error400);
+                        setInfo('ошибка 400 - обычно означает что скорее всего фронт отправил что-то не то на бэк!')
+                    } else if (status === 500) {
+                        setCode('Ошибка 500: Внутренняя ошибка сервера');
+                        setText('эмитация ошибки на сервере')
+                        setImage(error500);
+                        setInfo('ошибка 500 - обычно означает что что-то сломалось на сервере, например база данных)')
+                    }  else {
+                        setCode(`Ошибка ${status}: Неизвестная ошибка сервера`);
+                        setText('Error')
+                        setImage(errorUnknown);
+                        setInfo('Error')
+                    }
+                } else {
+                    // Ошибка в настройке запроса (например, неверный URL)
+                    setCode('Axios Error: Ошибка при отправке запроса');
+                    setText('Error')
+                    setImage(errorUnknown);
+                    setInfo('Error')
+                }
             })
+
     }
 
     return (
@@ -56,6 +93,7 @@ const HW13 = () => {
                         onClick={send(true)}
                         xType={'secondary'}
                         // дописать
+                        disabled={info === '...loading'}
 
                     >
                         Send true
@@ -65,6 +103,7 @@ const HW13 = () => {
                         onClick={send(false)}
                         xType={'secondary'}
                         // дописать
+                        disabled={info === '...loading'}
 
                     >
                         Send false
@@ -74,6 +113,7 @@ const HW13 = () => {
                         onClick={send(undefined)}
                         xType={'secondary'}
                         // дописать
+                        disabled={info === '...loading'}
 
                     >
                         Send undefined
@@ -83,6 +123,7 @@ const HW13 = () => {
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
                         // дописать
+                        disabled={info === '...loading'}
 
                     >
                         Send null

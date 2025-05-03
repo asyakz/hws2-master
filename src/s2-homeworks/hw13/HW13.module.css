@@ -1,16 +1,31 @@
 .buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+    max-width: 600px;
+
 }
 
 .responseContainer {
+    display: flex;
+    margin: 50px;
 }
 
 .imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .image {
+    margin-right: 50px;
 }
 
 .textContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
 }
 
 .code {
