@@ -1,27 +1,24 @@
-.tech {
-    width: 50vw;
-}
-
-.developer {
-
-}
-
-.techHeader {
-    width: 50vw;
-}
-
-.developerHeader {
-
-}
-
-.row {
+.row, .rowHeader {
     display: flex;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.tech, .techHeader {
+    width: 50%;
+}
+
+.developer, .developerHeader {
+    width: 50%;
 }
 
 .rowHeader {
-    display: flex;
+    font-weight: bold;
+    background-color: #f5f5f5;
 }
 
 .loading {
-
+    padding: 20px;
+    text-align: center;
+    color: #666;
 }

@@ -47,26 +47,32 @@ const HW15 = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const [techs, setTechs] = useState<TechType[]>([])
 
-    const sendQuery = (params: any) => {
+    const sendQuery = (params: ParamsType) => {
         setLoading(true)
         getTechs(params)
             .then((res) => {
                 // делает студент
-
+                if (res?.data) {
+                    setTechs(res.data.techs)
+                    setTotalCount(res.data.totalCount)
+                }
+                setLoading(false)
                 // сохранить пришедшие данные
-
-                //
             })
     }
 
     const onChangePagination = (newPage: number, newCount: number) => {
         // делает студент
 
-        // setPage(
-        // setCount(
+        setPage(newPage)
+        setCount(newCount)
 
-        // sendQuery(
-        // setSearchParams(
+        sendQuery({
+            page: newPage,
+            count: newCount,
+            sort
+        })
+        setSearchParams({page: newPage.toString(), count: newCount.toString()})
 
         //
     }
@@ -74,21 +80,29 @@ const HW15 = () => {
     const onChangeSort = (newSort: string) => {
         // делает студент
 
-        // setSort(
-        // setPage(1) // при сортировке сбрасывать на 1 страницу
+        setSort(newSort)
+        setPage(1) // при сортировке сбрасывать на 1 страницу
 
-        // sendQuery(
-        // setSearchParams(
+        sendQuery({page: 1, count, sort: newSort})
+        setSearchParams({
+            page: '1',
+            count: count.toString(),
+            sort: newSort
+        })
 
         //
     }
 
     useEffect(() => {
         const params = Object.fromEntries(searchParams)
-        sendQuery({page: params.page, count: params.count})
-        setPage(+params.page || 1)
-        setCount(+params.count || 4)
-    }, [])
+        sendQuery({
+            page: Number(params.page) || 1,
+            count: Number(params.count) || 4,
+            sort: params.sort || ''
+        } as ParamsType)
+        setPage(Number(params.page) || 1)
+        setCount(Number(params.count) || 4)
+    }, [searchParams])
 
     const mappedTechs = techs.map(t => (
         <div key={t.id} className={s.row}>

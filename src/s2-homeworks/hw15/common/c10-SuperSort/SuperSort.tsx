@@ -1,9 +1,17 @@
 import React from 'react'
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+// import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 // добавить в проект иконки и импортировать
 const downIcon = '[\\/]'
 const upIcon = '[/\\]'
 const noneIcon = '[--]'
+
+// const downIcon = <ExpandMoreIcon fontSize="small" />
+// const upIcon = <ExpandLessIcon fontSize="small" />
+// const noneIcon = <HighlightOffIcon fontSize="small" />
+
 
 export type SuperSortPropsType = {
     id?: string
@@ -14,7 +22,14 @@ export type SuperSortPropsType = {
 
 export const pureChange = (sort: string, down: string, up: string) => {
     // пишет студент, sort: (click) => down (click) => up (click) => '' (click) => down ...
-    return up // исправить
+    switch (sort) {
+        case down:
+            return up
+        case up:
+            return ''
+        default:
+            return down
+    }
 }
 
 const SuperSort: React.FC<SuperSortPropsType> = (
